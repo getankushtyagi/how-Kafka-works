@@ -103,17 +103,38 @@ All services are **decoupled** - they don't know about each other, only about Ka
 
 No additional installation needed! The kafkajs package is already installed in the parent directory.
 
+### Docker Option
+
+To start the broker and all services with one command from the repository root:
+
+```bash
+docker compose up --build
+```
+
+This launches:
+- Redpanda as the Kafka-compatible broker
+- Automatic topic creation
+- Order, payment, inventory, notification, and analytics services in one app container
+
+To stop the stack:
+
+```bash
+docker compose down
+```
+
 **Update Kafka Broker Address:**
 
 Edit `config/kafka-client.js` and update the broker address:
 
 ```javascript
-brokers: ['YOUR_KAFKA_BROKER:9092']
+KAFKA_BROKERS=YOUR_KAFKA_BROKER:9092
 ```
 
 Replace `YOUR_KAFKA_BROKER` with:
 - `localhost` if Kafka is on your machine
 - Your Kafka server IP address
+
+If `KAFKA_BROKERS` is not set, the default is `localhost:9092`.
 
 ## ▶️ Running the Demo
 

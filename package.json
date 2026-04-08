@@ -4,7 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "admin": "node admin.js",
+    "producer": "node producer.js",
+    "consumer": "node consumer.js",
+    "ecommerce:topics": "node ecommerce-kafka-demo/setup/create-topics.js",
+    "ecommerce:start": "node ecommerce-kafka-demo/start-all.js",
+    "docker:start": "node ecommerce-kafka-demo/start-all.js"
   },
   "keywords": [],
   "author": "",

@@ -10,6 +10,15 @@
 
 import { Kafka, logLevel } from "kafkajs";
 
+function getBrokers() {
+    const brokerList = process.env.KAFKA_BROKERS ?? 'localhost:9092';
+
+    return brokerList
+        .split(',')
+        .map((broker) => broker.trim())
+        .filter(Boolean);
+}
+
 // Suppress timeout warnings (known kafkajs issue on some systems)
 process.removeAllListeners('warning');
 process.on('warning', (warning) => {
@@ -31,7 +40,7 @@ process.on('warning', (warning) => {
  */
 export const kafka = new Kafka({
     clientId: 'ecommerce-app',
-    brokers: ['172.24.0.246:9092'], // Update with your Kafka broker addresses
+    brokers: getBrokers(),
     connectionTimeout: 10000,
     requestTimeout: 30000,
     retry: {
@@ -42,4 +51,4 @@ export const kafka = new Kafka({
     logLevel: logLevel.ERROR,      // Change to logLevel.INFO for detailed logs
 });
 
-console.log('✓ Kafka client configured');
+console.log(`✓ Kafka client configured (${getBrokers().join(', ')})`);
